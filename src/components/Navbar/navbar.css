@@ -1,0 +1,19 @@
+.navbar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    top: 4rem;
+    max-width: 100%;
+    margin: auto;
+    /* margin-top: 1rem; */
+    /* border:1px solid red; */
+    font-family: inherit;
+}
+.navbar-tab{
+    margin:1rem;
+}
+.navbar-tab:hover{
+    cursor:pointer;
+    border-bottom: 2px solid var(--primary-color);
+}
