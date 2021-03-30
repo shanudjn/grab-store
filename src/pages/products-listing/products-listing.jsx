@@ -10,9 +10,9 @@ export function ProductListing() {
     function getColor(wishList, id) {
         const index = wishList.findIndex((wishlistItem) => wishlistItem.id === id);
         if (index !== -1) {
-            return "red";
+            return "#F87171";
         }
-        return "green";
+        return "#9CA3AF";
     }
     function isItemInWishList(wishList, id) {
         const index = wishList.findIndex((wishlistItem) => wishlistItem.id === id);
@@ -33,7 +33,7 @@ export function ProductListing() {
             <div className="product-section">
                 <div className="div-sidebar">
                     <aside>
-                        <h5>Sort By</h5>
+                        <p className="filter-heading">Sort By</p>
                         <label>
                             <input
                                 type="radio"
@@ -48,7 +48,7 @@ export function ProductListing() {
                             />
                             Price Low to High
                         </label>
-                        <h5>Filters</h5>
+                        <p className="filter-heading">Filters</p>
 
                         <label>
                             <input
@@ -74,7 +74,7 @@ export function ProductListing() {
 
                             <div className="card-content">
                                 <div className="div-brand-name">
-                                    <h4 className="card-header">{product.name}</h4>
+                                    <p className="para-price">{product.name}</p>
                                     <span
                                         className="material-icons icons"
                                         style={{
@@ -90,15 +90,16 @@ export function ProductListing() {
                                                 : dispatch({ type: "ADD_TO_WISHLIST", payload: product })
                                         }
                                     >
-                                        favorite
+                                        favorite_border
                                     </span>
                                 </div>
-                                <h4 className="heading price">{product.price}</h4>
                                 <p className="card-text">{product.material}</p>
+                                <h4 className="heading price"><span>&#8377;{product.price}</span></h4>
+
                                 {isItemInCart(cartList, product.id) ? (
                                     <button className="btn btn-secondary btn-disabled" disabled>
-                                        Added
-                                        <span class="material-icons ">check_circle</span>
+                                        <span>Added</span>
+                                        <span class="material-icons added-icon ">check_circle</span>
                                     </button>
                                 ) : (
                                     <button

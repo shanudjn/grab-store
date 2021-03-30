@@ -10,18 +10,18 @@ export function Cart() {
     console.log(total);
     return (
         <>
-            <div className="div-cartlist-amount">
+            <div className="div-cartlist-invoice">
                 <div className="cart-listing-horizontal">
                     {cartList.map((product) => (
                         <div className="card-horizontal" key={product.id}>
                             <img src={product.image} alt="pic" />
                             <div className="card-content-horizontal">
                                 <div className="div-brand-name-horizontal">
-                                    <h4 className="header card-header-horizontal">
+                                    <p className="card-header-horizontal">
                                         {product.name}
-                                    </h4>
+                                    </p>
                                 </div>
-                                <h4 className="heading price">Rs.{product.price}</h4>
+                                <p className="price">Rs.{product.price}</p>
                                 <p className="card-text">{product.material}</p>
                                 <p className="card-text">
                                     Quantity :{" "}
@@ -69,7 +69,7 @@ export function Cart() {
                     ))}
                 </div>
                 <div className="div-invoice">
-                    <h4 className="heading price price-detail">Price Details</h4>
+                    <h4 className="price price-detail">Price Details</h4>
                     <ul className="list-invoice">
                         <li className="list-item-invoice">
                             {" "}
@@ -84,7 +84,7 @@ export function Cart() {
                     </ul>
                     <div className="border"></div>
                     <div className="div-invoice-total">
-                        <h4 className="header">Total : </h4>
+                        <h4 className="">Total : </h4>
                         <h4 className="card-text invoice-price">Rs.{total}</h4>
                     </div>
                 </div>

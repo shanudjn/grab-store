@@ -7,6 +7,7 @@ import { Home } from './pages/home/home';
 import { Wishlist } from './pages/wishlist/wishlist';
 import { ProductListing } from './pages/products-listing/products-listing';
 import { Cart } from './pages/cart/cart';
+import { useCart } from './context/cart-context';
 
 
 
@@ -17,10 +18,14 @@ function App() {
   function handleSetRoute(route) {
     setRoute(route)
   }
+  const { wishList, cartList } = useCart();
+
+  const wishlistLength = wishList.length;
+  const cartlistLength = cartList.length;
 
   return (
     <div className="App">
-      <Header setRoute={handleSetRoute} />
+      <Header setRoute={handleSetRoute} wishlistLength={wishlistLength} cartlistLength={cartlistLength} />
       <Navbar setRoute={handleSetRoute} />
       {route === "home" && <Home />}
       {route === "wishlist" && <Wishlist />}

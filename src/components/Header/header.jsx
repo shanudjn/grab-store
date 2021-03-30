@@ -1,7 +1,7 @@
 import './header.css';
 
 
-export function Header({ setRoute }) {
+export function Header({ setRoute, wishlistLength, cartlistLength }) {
     return (
         <nav className="header">
             <div className="brand-section">
@@ -32,7 +32,7 @@ export function Header({ setRoute }) {
                         >
                             favorite_border
                             </span>
-                        <span className="badge-notification2">2</span>
+                        <span className="badge-notification2">{wishlistLength}</span>
 
                     </li>
 
@@ -45,7 +45,7 @@ export function Header({ setRoute }) {
                         >
                             shopping_cart
                             </span>
-                        <span className="badge-notification2">2</span>
+                        <span className="badge-notification2">{cartlistLength}</span>
 
                     </li>
                 </ul>

@@ -1,0 +1,103 @@
+.div-cartlist-invoice {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .cart-listing-horizontal {
+    max-width: 600px;
+    margin-top: 5rem;
+    justify-content: center;
+    /* margin: auto; */
+    /* border: 1px solid red; */
+  }
+  .card-horizontal {
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    padding: 1rem;
+    /* flex-wrap: wrap; */
+  }
+  .card-header-horizontal {
+    margin: 0;
+    text-align: left;
+  }
+  .card-horizontal img {
+    width: 40%;
+    height: auto;
+  }
+  .card-content-horizontal {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .card-horizontal img {
+    width: 40%;
+    height: auto;
+  }
+  .card-content-horizontal {
+    margin-left: 1rem;
+    
+  }
+  .card-text{
+      margin:0
+  }
+  .price{
+      text-align: left;
+      font-weight: 500;
+  }
+  .button-change-quantity {
+    font-size: 1rem;
+    background-color: var(--add-subtract-button-color);
+    border-radius: 2px;
+    border: none;
+  }
+  .button-change-quantity:hover {
+    cursor: pointer;
+  }
+  .span-quantity {
+    font-family: inherit;
+    font-size: 1rem;
+    margin: 0.5rem;
+  }
+  .span-quantity:hover {
+    cursor: pointer;
+  }
+  .button-action {
+    background-color: var(--add-subtract-button-color);
+    border: none;
+    padding: 0.25rem;
+    border-radius: 4px;
+    margin: 0.25rem;
+    font-family: inherit;
+  }
+  .button-action:hover {
+    cursor: pointer;
+  }
+  .div-invoice {
+    margin-top: 5rem;
+    padding: 1.75rem;
+    /* max-width: 400px; */
+    /* border: 1px solid yellow; */
+  }
+  .list-invoice {
+    padding: 0;
+  }
+  .list-item-invoice {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+  .invoice-price {
+    margin-left: 2rem;
+  }
+  .border {
+    border-top: 1px solid var(--border-color);
+  }
+  .div-invoice-total {
+    display: flex;
+    align-items: baseline;
+  }
+  
