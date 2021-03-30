@@ -9,7 +9,7 @@
     left: 0;
     z-index: 1;
     width: 100%;
-    /* background-color: var(--white);    */
+    background-color: var(--white);   
     flex-wrap: wrap;    
   }
  

@@ -5,10 +5,12 @@
     position: relative;
     top: 4rem;
     max-width: 100%;
-    margin: auto;
-    /* margin-top: 1rem; */
+    /* margin: auto; */
+    /* margin-bottom: 2rem; */
     /* border:1px solid red; */
     font-family: inherit;
+    /* padding: 1rem; */
+    
 }
 .navbar-tab{
     margin:1rem;
