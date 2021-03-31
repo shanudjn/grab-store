@@ -1,12 +1,13 @@
 import { createContext, useReducer, useContext } from "react";
-// import faker from "faker";
+import data from '../data';
+
 
 const CartContext = createContext();
+const ProductContext = createContext();
 
 export function CartProvider({ children }) {
     const cartList = [];
     const wishList = [];
-    // const likeIconBgColor = "black";
 
     function cartReducer(state, action) {
         console.log("inside dispatch");
@@ -96,8 +97,6 @@ export function CartProvider({ children }) {
     const [state, dispatch] = useReducer(cartReducer, {
         cartList,
         wishList
-
-        // likeIconBgColor
     });
 
     return (
@@ -105,7 +104,8 @@ export function CartProvider({ children }) {
             value={{
                 cartList: state.cartList,
                 wishList: state.wishList,
-                dispatch
+                dispatch,
+
 
                 // likeIconBgColor: state.likeIconBgColor
             }}
@@ -117,4 +117,16 @@ export function CartProvider({ children }) {
 
 export function useCart() {
     return useContext(CartContext);
+}
+
+const productList = data;
+
+export function ProductsProvider({ children }) {
+    return <ProductContext.Provider value={{ productList }}>
+        {children}
+    </ProductContext.Provider>
+}
+
+export function useProduct() {
+    return useContext(ProductContext);
 }

@@ -1,11 +1,12 @@
 import './products-listing.css';
-import data from '../../data';
+//import data from '../../data';
 
-import { useCart } from '../../context/cart-context';
+import { useCart, useProduct } from '../../context/cart-context';
 
 export function ProductListing() {
-    console.log(data);
+
     const { cartList, wishList, dispatch } = useCart();
+    const { productList } = useProduct();
 
     function getColor(wishList, id) {
         const index = wishList.findIndex((wishlistItem) => wishlistItem.id === id);
@@ -68,7 +69,7 @@ export function ProductListing() {
                     </aside>
                 </div>
                 <div className="product-listing">
-                    {data.map((product) => (
+                    {productList.map((product) => (
                         <div className="card card-badge" key={product.id}>
                             <img src={product.image} alt="pic" />
 
