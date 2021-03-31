@@ -2,7 +2,7 @@ import './products-listing.css';
 //import data from '../../data';
 
 import { useCart } from '../../context/cart-context';
-import { useProduct } from '../../context/product-context';
+import { useProduct, } from '../../context/product-context';
 
 export function ProductListing() {
 
