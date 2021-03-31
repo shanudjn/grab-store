@@ -1,9 +1,9 @@
 import { createContext, useReducer, useContext } from "react";
-import data from '../data';
+
 
 
 const CartContext = createContext();
-const ProductContext = createContext();
+
 
 export function CartProvider({ children }) {
     const cartList = [];
@@ -119,14 +119,3 @@ export function useCart() {
     return useContext(CartContext);
 }
 
-const productList = data;
-
-export function ProductsProvider({ children }) {
-    return <ProductContext.Provider value={{ productList }}>
-        {children}
-    </ProductContext.Provider>
-}
-
-export function useProduct() {
-    return useContext(ProductContext);
-}

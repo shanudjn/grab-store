@@ -1,7 +1,8 @@
 import './products-listing.css';
 //import data from '../../data';
 
-import { useCart, useProduct } from '../../context/cart-context';
+import { useCart } from '../../context/cart-context';
+import { useProduct } from '../../context/product-context';
 
 export function ProductListing() {
 
