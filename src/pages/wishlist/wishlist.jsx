@@ -7,7 +7,7 @@ export function Wishlist() {
     const { wishList, dispatch } = useCart();
     return (
         <>
-            <div className="cart-listing">
+            <div className="div-cart-listing">
                 {wishList.map((product) => (
                     <div className="card card-badge" key={product.id}>
                         <img src={product.image} alt="pic" />

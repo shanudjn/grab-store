@@ -1,17 +1,17 @@
-import { createServer, Model, RestSerializer } from 'miragejs';
+import { createServer, Model } from 'miragejs';
 import faker from "faker";
 
 faker.seed(123);
 
+export function TestingMock() {
+    console.log("Inside Mock Server")
+}
+
 export default function mockServer() {
     createServer({
-        serializers: {
-            application: RestSerializer
-        },
         models: {
             product: Model
         },
-
         seeds(server) {
             [...Array(50)].forEach(item => {
                 server.create("product", {

@@ -1,5 +1,6 @@
 :root{
-  --add-subtract-button-color: #F3F4F6
+  --add-subtract-button-color: #F3F4F6;
+  --cancel-hover-button-color:#F87171
 }
 body {
   margin: 0;

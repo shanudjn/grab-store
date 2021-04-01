@@ -1,28 +1,31 @@
-import { createContext, useEffect, useContext, useReducer } from 'react';
+import { createContext, useEffect, useContext, useReducer, useState } from 'react';
 import axios from 'axios';
 import data from '../data';
 
 const ProductContext = createContext();
 
-const productList = data;
 
-const getData = async () => {
-    console.log("inside getdata")
-    try {
-        const response = await axios.get('/api/products');
-        console.log(response)
-    } catch (error) {
-        console.log(error)
-    }
-}
+
 
 
 export function ProductsProvider({ children }) {
+    const [productList, setProductList] = useState([]);
 
+    const getData = async () => {
+        console.log("inside getdata")
+        try {
+            const response = await axios.get('/api/products');
+            console.log(response.data);
+            setProductList(response.data.products)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
     useEffect(() => {
-        getData()
+        getData();
     }, [])
 
     function productReducer(state, action) {

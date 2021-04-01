@@ -1,13 +1,10 @@
-.cart-listing {
+.div-cart-listing{
     /* border: 1px solid red; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    /* position: relative; */
-    top: 4rem;
-    max-width: 100%;
-    margin: auto;
-    margin-top: 2rem;
+    max-width: 1000px;
+    margin:auto;
+    margin-top: 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     /* border:1px solid red; */
     /* order:2; */
   }
@@ -24,10 +21,11 @@ padding: 0.5rem;
 .btn-add{
     border-radius: none;
 }
-  .icon-cancel {
-    position: absolute;
-    top: 0.25rem;
-    right: 00.25rem;
-    color: var(--white);
-  }
+.icon-cancel {
+  position: absolute;
+  top: 0.25rem;
+  right: 00.25rem;
+  color: var(--white);
+}
+
   

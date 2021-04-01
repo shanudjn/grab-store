@@ -1,14 +1,9 @@
 .product-listing,
 .cart-listing {
   /* border: 1px solid red; */
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  position: relative;
-  top: 4rem;
-  max-width: 70%;
-  margin: auto;
-  margin-top: 2rem;
+  margin-top: 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   /* order:2; */
 }
 
@@ -98,6 +93,14 @@ aside label{
     aside{
         display: none;
     }
+    .product-listing,
+.cart-listing {
+  /* border: 1px solid red; */
+  margin-top: 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  /* order:2; */
+}
     
 }
 

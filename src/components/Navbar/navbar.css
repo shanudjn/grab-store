@@ -17,5 +17,5 @@
 }
 .navbar-tab:hover{
     cursor:pointer;
-    border-bottom: 2px solid var(--primary-color);
+    box-shadow: var(--primary-color) 0px 1px 0px, var(--white) 0px 1px 0px inset;
 }

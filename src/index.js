@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import { CartProvider } from "./context/cart-context";
 import { ProductsProvider } from "./context/product-context";
+import mockServer from "./api/mock.server";
+
+
+mockServer();
 
 ReactDOM.render(
   <React.StrictMode>
