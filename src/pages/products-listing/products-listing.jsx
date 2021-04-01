@@ -7,14 +7,15 @@ import { useProduct } from '../../context/product-context';
 export function ProductListing() {
 
     const { cartList, wishList, dispatch } = useCart();
-    const { productList, sortBy, showAllInventory, showFastDelivery, productFilterDispatch } = useProduct();
+    const { productList, sortBy, showAllInventory,
+        showFastDelivery, searchTerm, productFilterDispatch } = useProduct();
 
     function getColor(wishList, id) {
         const index = wishList.findIndex((wishlistItem) => wishlistItem.id === id);
         if (index !== -1) {
             return "#F87171";
         }
-        return "#9CA3AF";
+        return "#E5E7EB";
     }
     function isItemInWishList(wishList, id) {
         const index = wishList.findIndex((wishlistItem) => wishlistItem.id === id);
@@ -34,11 +35,11 @@ export function ProductListing() {
     function getSortedData(productList, sortBy) {
         if (sortBy === "HIGH_TO_LOW") {
             console.log("sorting:high to low")
-            return productList.sort((a, b) => b["price"] - a["price"])
+            return productList.sort((a, b) => b.price - a.price)
         }
         if (sortBy === "LOW_TO_HIGH") {
             console.log("sorting:low to high")
-            return productList.sort((a, b) => a["price"] - b["price"])
+            return productList.sort((a, b) => a.price - b.price)
         }
         return productList;
     }
@@ -48,9 +49,20 @@ export function ProductListing() {
             .filter(({ fastDelivery }) => showFastDelivery ? fastDelivery : true)
             .filter(({ inStock }) => showAllInventory ? true : inStock)
     }
-    const sortedData = getSortedData(productList, sortBy);
 
-    const filteredData = getFilteredData(sortedData, { showAllInventory, showFastDelivery })
+    function getSearchedData(productList, searchTerm) {
+        return productList.filter(item => {
+            if (item.name.toLowerCase().includes(searchTerm.toLowerCase()) === true)
+                return item
+            return null
+        })
+    }
+
+    const searchedData = getSearchedData(productList, searchTerm);
+
+    const sortedData = getSortedData(searchedData, sortBy);
+
+    const filteredData = getFilteredData(sortedData, { showAllInventory, showFastDelivery });
 
     console.log(filteredData);
 
@@ -97,6 +109,7 @@ export function ProductListing() {
                             />
                             Fast Delivery Only
           </label>
+                        {/* <button onClick={() => productFilterDispatch({ type: "CLEAR_FILTERS" })}>Clear All Filters</button> */}
                     </aside>
                 </div>
                 <div className="product-listing">
@@ -122,7 +135,7 @@ export function ProductListing() {
                                                 : dispatch({ type: "ADD_TO_WISHLIST", payload: product })
                                         }
                                     >
-                                        favorite_border
+                                        favorite
                                     </span>
                                 </div>
                                 <p className="card-text">{product.material}</p>

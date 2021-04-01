@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <Header setRoute={handleSetRoute} wishlistLength={wishlistLength} cartlistLength={cartlistLength} />
       <Navbar setRoute={handleSetRoute} />
-      {route === "home" && <Home />}
+      {route === "home" && <Home setRoute={handleSetRoute} />}
       {route === "wishlist" && <Wishlist />}
       {route === "productListing" && <ProductListing />}
       {route === "cart" && <Cart />}

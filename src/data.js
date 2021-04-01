@@ -2,7 +2,7 @@ import faker from "faker";
 
 faker.seed(123);
 
-const data = [...Array(10)].map((item) => ({
+const data = [...Array(20)].map((item) => ({
     id: faker.datatype.uuid(),
     name: faker.commerce.productName(),
     desc: faker.commerce.productDescription(),

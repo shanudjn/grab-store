@@ -106,8 +106,6 @@ export function CartProvider({ children }) {
                 wishList: state.wishList,
                 dispatch,
 
-
-                // likeIconBgColor: state.likeIconBgColor
             }}
         >
             {children}

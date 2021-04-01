@@ -1,9 +1,12 @@
 import './home.css';
 
-export function Home() {
+export function Home({ setRoute }) {
     return (
-        <div className="hero">
-
-        </div>
+        <main>
+            <div className="hero">
+                <p>Find merch of your favorite celebrities.</p>
+                <button onClick={() => setRoute("productListing")}>Shop Now</button>
+            </div>
+        </main>
     )
 }

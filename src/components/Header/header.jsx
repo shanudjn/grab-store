@@ -1,7 +1,21 @@
+import { useState } from 'react';
+import { useProduct } from '../../context/product-context';
 import './header.css';
 
 
 export function Header({ setRoute, wishlistLength, cartlistLength }) {
+    const { productFilterDispatch } = useProduct();
+
+    const [searchInput, setSearchInput] = useState("")
+
+    function searchProductList(e) {
+        e.preventDefault();
+        console.log(searchInput)
+        productFilterDispatch({ type: "SEARCH", payload: searchInput });
+        setRoute("productListing");
+
+    }
+
     return (
         <nav className="header">
             <div className="brand-section">
@@ -11,12 +25,13 @@ export function Header({ setRoute, wishlistLength, cartlistLength }) {
                 <h1>GS</h1>
             </div>
             <div className="div-search">
-                <form className="form-div-search">
+                <form className="form-div-search" onSubmit={(e) => searchProductList(e)}>
                     <input
                         type="text"
-                        placeholder="Search Products Here" width="20"
+                        placeholder="Search Products Here" width="70"
+                        onChange={(e) => setSearchInput(e.target.value)}
                     />
-                    <button className="button-search">
+                    <button className="button-search" >
                         <span className="material-icons">search</span>
                     </button>
                 </form>

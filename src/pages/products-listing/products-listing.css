@@ -15,10 +15,14 @@
 /**card*/
 .card {
   /* max-width: 200px; */
-  max-width: 300px;
-  border:1px solid var(--border-color);
-  
+  max-width: 208px;
+  border:1px solid var(--border-color); 
 }
+.card-content{
+  flex-grow: 1;
+  text-align: left;
+}
+
 .card img {
   width: 100%;
   height: auto;
@@ -31,6 +35,7 @@
 .para-price{
   font-family: inherit;
   margin:0;
+  
 }
 .price {
 margin: 0.2rem 0 0.2rem 0;
