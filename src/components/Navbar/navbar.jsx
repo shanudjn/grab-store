@@ -1,10 +1,11 @@
 import './navbar.css';
-export function Navbar({ setRoute }) {
+import { Link } from "react-router-dom";
+
+export function Navbar() {
     return (
         <nav className="navbar">
-            <p className="navbar-tab" onClick={() => setRoute("home")}>HOME</p>
-            <p className="navbar-tab" onClick={() => setRoute("productListing")}>PRODUCTS</p>
-            <p className="navbar-tab" >OFFERS</p>
+            <span className="navbar-item"><Link to="/"> HOME </Link></span>
+            <span className="navbar-item"><Link to="/products"> PRODUCTS </Link></span>
         </nav>
     )
 }

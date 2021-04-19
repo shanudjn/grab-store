@@ -12,9 +12,17 @@
     background-color: var(--white);   
     flex-wrap: wrap;    
   }
- 
+.brand-section h1{
+  color:var(--primary-color)
+}
+ .brand-section a{
+   text-decoration: none;
+ }
   .brand-logo{
       display: none;
+  }
+  .brand-logo a{
+    text-decoration: none;
   }
 
   .inventory-list {
@@ -85,8 +93,13 @@
     }
     .brand-logo{
       display: block;
-      color:var(--primary-color);
+      
     }
+    .brand-logo h1{
+      color:var(--primary-color);
+      
+    }
+    
     .form-div-search{
         width: 100%;
     }

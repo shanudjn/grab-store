@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useProduct } from '../../context/product-context';
+import { Link } from "react-router-dom";
 import './header.css';
 
 
@@ -19,10 +20,10 @@ export function Header({ setRoute, wishlistLength, cartlistLength }) {
     return (
         <nav className="header">
             <div className="brand-section">
-                <h1 onClick={() => setRoute("home")}>Grab Store</h1>
+                <Link to="/"><h1 >Grab Store</h1></Link>
             </div>
-            <div className="brand-logo" onClick={() => setRoute("home")}>
-                <h1>GS</h1>
+            <div className="brand-logo" >
+                <Link to="/"><h1 >GS</h1></Link>
             </div>
             <div className="div-search">
                 <form className="form-div-search" onSubmit={(e) => searchProductList(e)}>
@@ -39,27 +40,20 @@ export function Header({ setRoute, wishlistLength, cartlistLength }) {
             <div className="inventory-section">
                 <ul className="inventory-list">
                     <li className="inventory-list-item">
-
-                        <span
-                            className="material-icons icons"
-                            onClick={() => setRoute("wishlist")}
-
-                        >
-                            favorite_border
+                        <Link to="/wishlist">
+                            <span className="material-icons icons">
+                                favorite_border
                             </span>
+                        </Link>
                         <span className="badge-notification2">{wishlistLength}</span>
-
                     </li>
 
                     <li className="inventory-list-item">
-
-                        <span
-                            className="material-icons icons"
-                            onClick={() => setRoute("cart")}
-
-                        >
-                            shopping_cart
+                        <Link to="/cart">
+                            <span className="material-icons icons">
+                                shopping_cart
                             </span>
+                        </Link>
                         <span className="badge-notification2">{cartlistLength}</span>
 
                     </li>

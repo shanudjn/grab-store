@@ -70,6 +70,7 @@ export function ProductListing() {
 
     return (
         <>
+
             <div className="product-section">
                 <Filter sortBy={sortBy} showAllInventory={showAllInventory} showFastDelivery={showFastDelivery} productFilterDispatch={productFilterDispatch} />
                 <div className="list-filter-button">

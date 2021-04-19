@@ -5,17 +5,17 @@
     position: relative;
     top: 4rem;
     max-width: 100%;
-    /* margin: auto; */
-    /* margin-bottom: 2rem; */
-    /* border:1px solid red; */
     font-family: inherit;
-    /* padding: 1rem; */
+    
     
 }
-.navbar-tab{
+.navbar-item{
     margin:1rem;
 }
-.navbar-tab:hover{
-    cursor:pointer;
-    box-shadow: var(--primary-color) 0px 1px 0px, var(--white) 0px 1px 0px inset;
+.navbar-item a{
+    text-decoration: none;
+
+}
+.navbar-item a:hover{
+    cursor: pointer;
 }
