@@ -6,17 +6,23 @@ import { CartProvider } from "./context/cart-context";
 import { ProductsProvider } from "./context/product-context";
 import mockServer from "./api/mock.server";
 import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProvider } from './context/auth-context'
 
 
 // mockServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <CartProvider>
-        <ProductsProvider> <App /></ProductsProvider>
-      </CartProvider>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <CartProvider>
+          <ProductsProvider>
+            <App />
+          </ProductsProvider>
+        </CartProvider>
+      </Router>
+    </AuthProvider>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

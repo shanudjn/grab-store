@@ -40,14 +40,13 @@ export function ProductsProvider({ children }) {
             case "SEARCH":
                 console.log("inside search switch case", action.payload)
                 return { ...state, searchTerm: action.payload }
-            // case "CLEAR_FILTERS":
-            //     console.log("clearing all filters")
-            //     return { ...state }
+
             default:
                 return state;
         }
     }
-    const [{ showAllInventory, showFastDelivery, sortBy, searchTerm }, productFilterDispatch] = useReducer(productReducer, { showAllInventory: true, showFastDelivery: false, sortBy: null, searchTerm: "a" });
+    const [{ showAllInventory, showFastDelivery, sortBy, searchTerm }, productFilterDispatch] = useReducer(productReducer,
+        { showAllInventory: true, showFastDelivery: false, sortBy: null, searchTerm: "" });
 
 
 
