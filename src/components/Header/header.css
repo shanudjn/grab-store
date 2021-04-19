@@ -84,6 +84,9 @@
     margin: 0.75rem;
     padding: 0;
   } */
+  .icons{
+    color:#202020;
+  }
   .icons:hover {  
     cursor: pointer;
   }

@@ -5,6 +5,7 @@ import { Filter } from '../../components/Filters/Filter'
 
 import { useCart } from '../../context/cart-context';
 import { useProduct } from '../../context/product-context';
+import { Navbar } from '../../components/Navbar/navbar'
 
 export function ProductListing() {
 
@@ -70,13 +71,13 @@ export function ProductListing() {
 
     return (
         <>
-
+            <Navbar />
             <div className="product-section">
                 <Filter sortBy={sortBy} showAllInventory={showAllInventory} showFastDelivery={showFastDelivery} productFilterDispatch={productFilterDispatch} />
                 <div className="list-filter-button">
                     <div className="product-listing">
                         {filteredData.map((product) => (
-                            <Card key={product.id} product={product} getColor={getColor} isItemInWishList={isItemInWishList} isItemInCart={isItemInCart}
+                            <Card key={product._id} product={product} getColor={getColor} isItemInWishList={isItemInWishList} isItemInCart={isItemInCart}
                                 cartList={cartList} wishList={wishList} dispatch={dispatch} />
                         ))}
                     </div>

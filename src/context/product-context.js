@@ -1,12 +1,8 @@
 import { createContext, useEffect, useContext, useReducer, useState } from 'react';
 import axios from 'axios';
-import data from '../data';
+// import data from '../data';
 
 const ProductContext = createContext();
-
-
-
-
 
 export function ProductsProvider({ children }) {
     const [productList, setProductList] = useState([]);
@@ -14,9 +10,12 @@ export function ProductsProvider({ children }) {
     const getData = async () => {
         console.log("inside getdata")
         try {
-            const response = await axios.get('/api/products');
-            console.log(response.data);
-            setProductList(response.data.products)
+            // const response = await axios.get('/api/products');
+            // console.log(response.data);
+            // setProductList(response.data.products)
+            const { data: { products } } = await axios.get("https://ecommerce.shahazad.repl.co/products");
+            console.log({ products });
+            setProductList(products)
 
         } catch (error) {
             console.log(error)

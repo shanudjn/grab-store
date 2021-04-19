@@ -1,6 +1,6 @@
 export function Card({ product, getColor, isItemInWishList, isItemInCart, cartList, wishList, dispatch }) {
     return (
-        <div className="card card-badge" key={product.id}>
+        <div className="card card-badge" key={product._id}>
             <img src={product.image} alt="pic" />
 
             <div className="card-content">
@@ -9,11 +9,11 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
                     <span
                         className="material-icons icons"
                         style={{
-                            color: getColor(wishList, product.id),
+                            color: getColor(wishList, product._id),
                             border: "black"
                         }}
                         onClick={() =>
-                            isItemInWishList(wishList, product.id)
+                            isItemInWishList(wishList, product._id)
                                 ? dispatch({
                                     type: "REMOVE_FROM_WISHLIST",
                                     payload: product

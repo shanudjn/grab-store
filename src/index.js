@@ -8,7 +8,7 @@ import mockServer from "./api/mock.server";
 import { BrowserRouter as Router } from "react-router-dom";
 
 
-mockServer();
+// mockServer();
 
 ReactDOM.render(
   <React.StrictMode>

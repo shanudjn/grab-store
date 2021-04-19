@@ -45,7 +45,7 @@ export function Header({ setRoute, wishlistLength, cartlistLength }) {
                                 favorite_border
                             </span>
                         </Link>
-                        <span className="badge-notification2">{wishlistLength}</span>
+                        {wishlistLength > 0 && <span className="badge-notification2">{wishlistLength}</span>}
                     </li>
 
                     <li className="inventory-list-item">
@@ -54,7 +54,16 @@ export function Header({ setRoute, wishlistLength, cartlistLength }) {
                                 shopping_cart
                             </span>
                         </Link>
-                        <span className="badge-notification2">{cartlistLength}</span>
+                        {cartlistLength > 0 && <span className="badge-notification2">{cartlistLength}</span>}
+
+                    </li>
+                    <li className="inventory-list-item">
+                        <Link to="/login">
+                            <span className="material-icons icons">
+                                login
+                            </span>
+                        </Link>
+                        {/* <span className="badge-notification2">{cartlistLength}</span> */}
 
                     </li>
                 </ul>
