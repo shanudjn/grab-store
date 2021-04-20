@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from '../../context/auth-context';
 import axios from "axios";
 import './login.css';
@@ -9,6 +10,8 @@ export function Login() {
     const [password, setPassword] = useState("");
 
     const { login, authDispatch } = useAuth();
+    const { state } = useLocation();
+    const navigate = useNavigate();
 
     function handleOnSubmit(e) {
         e.preventDefault();
@@ -22,13 +25,18 @@ export function Login() {
             if (response.status === 200) {
                 authDispatch({ type: "LOGIN_USER" })
             }
+            if (state === null) {
+                navigate("/");
+            } else {
+                navigate(state.from);
+            }
         } catch (error) {
             console.log(error)
         }
 
         // authDispatch({ type: "LOGIN_USER" })
     }
-
+    console.log({ state })
     return (
         <>
             <form className="form-login" onSubmit={handleOnSubmit} >

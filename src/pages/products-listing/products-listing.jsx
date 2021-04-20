@@ -14,21 +14,23 @@ export function ProductListing() {
         showFastDelivery, searchTerm, productFilterDispatch } = useProduct();
 
     function getColor(wishList, id) {
-        const index = wishList.findIndex((wishlistItem) => wishlistItem.id === id);
+        const index = wishList.findIndex((wishlistItem) => wishlistItem._id === id);
         if (index !== -1) {
             return "#F87171";
         }
         return "#E5E7EB";
     }
     function isItemInWishList(wishList, id) {
-        const index = wishList.findIndex((wishlistItem) => wishlistItem.id === id);
+
+
+        const index = wishList.findIndex((wishlistItem) => wishlistItem._id === id);
         if (index !== -1) {
             return true;
         }
         return false;
     }
     function isItemInCart(cartList, id) {
-        const index = cartList.findIndex((wishlistItem) => wishlistItem.id === id);
+        const index = cartList.findIndex((cartListItem) => cartListItem._id === id);
         if (index !== -1) {
             return true;
         }
@@ -37,17 +39,17 @@ export function ProductListing() {
 
     function getSortedData(productList, sortBy) {
         if (sortBy === "HIGH_TO_LOW") {
-            console.log("sorting:high to low")
+
             return productList.sort((a, b) => b.price - a.price)
         }
         if (sortBy === "LOW_TO_HIGH") {
-            console.log("sorting:low to high")
+
             return productList.sort((a, b) => a.price - b.price)
         }
         return productList;
     }
     function getFilteredData(sortedData, { showAllInventory, showFastDelivery }) {
-        console.log("returning filtered data")
+
         return sortedData
             .filter(({ fastDelivery }) => showFastDelivery ? fastDelivery : true)
             .filter(({ inStock }) => showAllInventory ? true : inStock)
@@ -67,7 +69,7 @@ export function ProductListing() {
 
     const filteredData = getFilteredData(sortedData, { showAllInventory, showFastDelivery });
 
-    console.log(filteredData);
+
 
     return (
         <>

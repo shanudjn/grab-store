@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
 
     const [state, authDispatch] = useReducer(reducer, initialLoginState)
-    console.log({ state })
+    // console.log({ state })
     return <AuthContext.Provider value={{ login: state.isLogin, authDispatch }} >
         {children}
     </AuthContext.Provider>

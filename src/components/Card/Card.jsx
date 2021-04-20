@@ -1,4 +1,28 @@
+import axios from "axios"
+
 export function Card({ product, getColor, isItemInWishList, isItemInCart, cartList, wishList, dispatch }) {
+
+    async function addToCart() {
+        const response = await axios.post('https://ecommerce.shahazad.repl.co/cart', { _id: product._id, quantity: 1 })
+        console.log(response.data);
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: product
+        })
+    }
+
+    function addToWishList() {
+        dispatch({ type: "ADD_TO_WISHLIST", payload: product })
+    }
+
+    async function handleAddToWishlist() {
+        isItemInWishList(wishList, product._id)
+
+            ? addToCart()
+
+            : addToWishList()
+    }
+
     return (
         <div className="card card-badge" key={product._id}>
             <img src={product.image} alt="pic" />
@@ -12,14 +36,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
                             color: getColor(wishList, product._id),
                             border: "black"
                         }}
-                        onClick={() =>
-                            isItemInWishList(wishList, product._id)
-                                ? dispatch({
-                                    type: "REMOVE_FROM_WISHLIST",
-                                    payload: product
-                                })
-                                : dispatch({ type: "ADD_TO_WISHLIST", payload: product })
-                        }
+                        onClick={handleAddToWishlist}
                     >
                         favorite
                 </span>
@@ -27,17 +44,16 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
                 <p className="card-text">{product.material}</p>
                 <h4 className="heading price"><span>&#8377;{product.price}</span></h4>
 
-                {isItemInCart(cartList, product.id) ? (
+                {isItemInCart(cartList, product._id) ? (
                     <button className="btn btn-secondary btn-disabled" disabled>
                         <span>Added</span>
-                        <span class="material-icons added-icon ">check_circle</span>
+                        <span className="material-icons added-icon ">check_circle</span>
                     </button>
                 ) : (
                     <button
                         className="btn btn-primary"
-                        onClick={() =>
-                            dispatch({ type: "ADD_TO_CART", payload: product })
-                        }
+                        onClick={addToCart}
+
                     >
                         Add To Cart
                     </button>

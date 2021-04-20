@@ -5,11 +5,12 @@ import { useCart } from '../../context/cart-context';
 
 export function Wishlist() {
     const { wishList, dispatch } = useCart();
+    console.log(wishList)
     return (
         <>
             <div className="div-cart-listing">
                 {wishList.map((product) => (
-                    <div className="card card-badge" key={product.id}>
+                    <div className="card card-badge" key={product._id}>
                         <img src={product.image} alt="pic" />
 
                         <div className="product-details">

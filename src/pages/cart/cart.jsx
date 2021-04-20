@@ -6,8 +6,8 @@ export function Cart() {
     const total = cartList.reduce((accum, item) => {
         return accum + item.quantity * item.price;
     }, 0);
-    console.log("inCart", cartList);
-    console.log(total);
+    // console.log("inCart", cartList);
+    // console.log(total);
     return (
         <>
             <div className="div-cartlist-invoice">
