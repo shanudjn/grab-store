@@ -1,15 +1,15 @@
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header/header';
-import { Navbar } from './components/Navbar/navbar';
+// import { Navbar } from './components/Navbar/navbar';
 import { Home } from './pages/home/home';
 import { Wishlist } from './pages/wishlist/wishlist';
 import { ProductListing } from './pages/products-listing/products-listing';
 import { Cart } from './pages/cart/cart';
 import { Login } from './pages/login/login';
-import { useCart } from './context/cart-context';
+// import { useCart } from './context/cart-context';
 import { PrivateRoute } from './private/PrivateRoute';
 
 

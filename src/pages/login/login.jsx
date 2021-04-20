@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/auth-context';
+import axios from "axios";
 import './login.css';
 
 export function Login() {
@@ -14,8 +15,18 @@ export function Login() {
         console.log(name, password);
 
     }
-    function handleClick() {
-        authDispatch({ type: "LOGIN_USER" })
+    async function handleClick() {
+        try {
+            const response = await axios.post("https://ecommerce.shahazad.repl.co/login", { name: "Shahazad", password: "qwerty" })
+            console.log(response.status);
+            if (response.status === 200) {
+                authDispatch({ type: "LOGIN_USER" })
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+        // authDispatch({ type: "LOGIN_USER" })
     }
 
     return (

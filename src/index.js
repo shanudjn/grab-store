@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { CartProvider } from "./context/cart-context";
 import { ProductsProvider } from "./context/product-context";
-import mockServer from "./api/mock.server";
+// import mockServer from "./api/mock.server";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from './context/auth-context'
 

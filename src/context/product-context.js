@@ -8,13 +8,13 @@ export function ProductsProvider({ children }) {
     const [productList, setProductList] = useState([]);
 
     const getData = async () => {
-        console.log("inside getdata")
+        // console.log("inside getdata")
         try {
             // const response = await axios.get('/api/products');
             // console.log(response.data);
             // setProductList(response.data.products)
             const { data: { products } } = await axios.get("https://ecommerce.shahazad.repl.co/products");
-            console.log({ products });
+            // console.log({ products });
             setProductList(products)
 
         } catch (error) {
