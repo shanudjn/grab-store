@@ -11,10 +11,12 @@ import { Cart } from './pages/cart/cart';
 import { Login } from './pages/login/login';
 // import { useCart } from './context/cart-context';
 import { PrivateRoute } from './private/PrivateRoute';
+import { useAuth } from './context/auth-context';
 
 
 
 function App() {
+
 
 
   return (

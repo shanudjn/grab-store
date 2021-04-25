@@ -8,7 +8,6 @@ export function ProductsProvider({ children }) {
     const [productList, setProductList] = useState([]);
 
     const getData = async () => {
-
         try {
             const { data: { products } } = await axios.get("https://ecommerce.shahazad.repl.co/products");
 

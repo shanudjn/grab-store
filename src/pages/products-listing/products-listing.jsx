@@ -22,7 +22,6 @@ export function ProductListing() {
     }
     function isItemInWishList(wishList, id) {
 
-
         const index = wishList.findIndex((wishlistItem) => wishlistItem._id === id);
         if (index !== -1) {
             return true;
@@ -57,7 +56,8 @@ export function ProductListing() {
 
     function getSearchedData(productList, searchTerm) {
         return productList.filter(item => {
-            if (item.name.toLowerCase().includes(searchTerm.toLowerCase()) === true)
+
+            if (item.name)
                 return item
             return null
         })
@@ -76,18 +76,18 @@ export function ProductListing() {
             <Navbar />
             <div className="product-section">
                 <Filter sortBy={sortBy} showAllInventory={showAllInventory} showFastDelivery={showFastDelivery} productFilterDispatch={productFilterDispatch} />
-                <div className="list-filter-button">
-                    <div className="product-listing">
-                        {filteredData.map((product) => (
-                            <Card key={product._id} product={product} getColor={getColor} isItemInWishList={isItemInWishList} isItemInCart={isItemInCart}
-                                cartList={cartList} wishList={wishList} dispatch={dispatch} />
-                        ))}
-                    </div>
-                    {/* <div className="filter-button">
-                        <button>Filter</button>
-                        <button>Sort</button>
-                    </div> */}
+                {/* <div className="list-filter-button"> */}
+                {/* <div className="toast">
+                    <p>Login To Buy</p>
+                </div> */}
+                <div className="product-listing">
+                    {filteredData.map((product) => (
+                        <Card key={product._id} product={product} getColor={getColor} isItemInWishList={isItemInWishList} isItemInCart={isItemInCart}
+                            cartList={cartList} wishList={wishList} dispatch={dispatch} />
+                    ))}
                 </div>
+
+                {/* </div> */}
 
             </div>
         </>

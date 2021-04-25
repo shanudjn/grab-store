@@ -1,123 +1,55 @@
 import { createContext, useReducer, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "./auth-context";
+import { cartAndWishlistReducer } from '../reducer/cart-wishlist-reducer'
+
 
 
 const CartContext = createContext();
 
-
 export function CartProvider({ children }) {
-    const [newcartList, setCartList] = useState("")
-    const cartList = [];
-    const wishList = [];
 
-    async function getCartListData() {
-        const { data } = await axios.get("https://ecommerce.shahazad.repl.co/cart");
-        console.log("cartdata", { data })
-        //setCartList(products)
+    const { login, userId } = useAuth();
+    // const [cartList, setCartList] = useState([]);
+    // const [wishList, setWishList] = useState([]);
+
+    const getCartListAndWishListData = async () => {
+        try {
+            const userCartDetails = await axios.get(`https://ecommerce.shahazad.repl.co/user/${userId}`);
+            //{ data: { user: { cart } } }
+            // console.log()
+            const cartData = userCartDetails.data.user.cart
+            const wishListData = userCartDetails.data.user.wishlist
+            // console.log({ ...cart })
+            //console.log({ cartData })
+            // setCartList(cart)
+            dispatch({ type: "SET_CART", payload: cartData })
+            dispatch({ type: "SET_WISHLIST", payload: wishListData })
+
+        } catch (error) {
+            console.log(error)
+        }
 
     }
+
 
     useEffect(() => {
-        getCartListData()
-    }, [])
 
-    function cartReducer(state, action) {
-        console.log("inside dispatch");
-        switch (action.type) {
-            case "ADD_TO_CART":
-                console.log(action.payload);
-                return {
-                    ...state,
-                    cartList: [...state.cartList, { ...action.payload, quantity: 1 }]
-                };
-            case "SEARCH_ITEM_IN_CART":
-                console.log(action.payload);
-                return {
-                    ...state,
-                    cartList: state.cartList.filter(
-                        (cartListItem) => cartListItem.name === action.payload
-                    )
-                };
-            case "ADD_TO_WISHLIST":
-                console.log("inside add to wishlist", action.payload);
-                return {
-                    ...state,
-                    wishList: state.wishList.concat(action.payload)
-                };
-            case "REMOVE_FROM_WISHLIST":
-                console.log(action.payload);
+        getCartListAndWishListData();
 
-                return {
-                    ...state,
-                    wishList: state.wishList.filter(
-                        (wishListItem) => wishListItem._id !== action.payload._id
-                    )
-                };
+    }, [login])
 
-            case "ADD_TO_CART_FROM_WISHLIST":
-                console.log(action.payload);
-                return {
-                    ...state,
-                    cartList: [...state.cartList, { ...action.payload, quantity: 1 }],
-                    wishList: state.wishList.filter(
-                        (wishListItem) => wishListItem._id !== action.payload._id
-                    )
-                };
-            case "REMOVE_FROM_CART":
-                console.log(action.payload);
-                return {
-                    ...state,
-                    cartList: state.cartList.filter(
-                        (cartListItem) => cartListItem._id !== action.payload._id
-                    )
-                };
-            case "ADD_TO_WISHLIST_FROM_CART":
-                return {
-                    ...state,
-                    cartList: state.cartList.filter(
-                        (cartListItem) => cartListItem._id !== action.payload._id
-                    ),
-                    wishList: [...state.wishList, action.payload]
-                };
 
-            case "INCREASE_QUANTITY":
-                console.log("Inside sec", action.payload);
-                return {
-                    ...state,
-                    cartList: state.cartList.map((cartListItem) =>
-                        cartListItem._id === action.payload._id
-                            ? { ...cartListItem, quantity: cartListItem.quantity + 1 }
-                            : { ...cartListItem }
-                    )
-                };
-            case "DECREASE_QUANTITY":
-                console.log("Inside sec", action.payload);
-                return {
-                    ...state,
-                    cartList: state.cartList.map((cartListItem) =>
-                        cartListItem._id === action.payload._id
-                            ? { ...cartListItem, quantity: (cartListItem.quantity > 1) ? cartListItem.quantity - 1 : 1 }
-                            : { ...cartListItem }
-                    )
-                };
 
-            default:
-                break;
-        }
-    }
 
-    const [state, dispatch] = useReducer(cartReducer, {
-        cartList,
-        wishList
-    });
-
+    const [{ cartList, wishList }, dispatch] = useReducer(cartAndWishlistReducer, { cartList: [], wishList: [] });
+    //console.log(state.cartList)
     return (
         <CartContext.Provider
             value={{
-                cartList: state.cartList,
-                wishList: state.wishList,
+                cartList,
+                wishList,
                 dispatch,
-
             }}
         >
             {children}

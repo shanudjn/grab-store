@@ -1,72 +1,129 @@
 import './cart.css';
-import { useCart } from './../../context/cart-context'
+import { useEffect, useState } from "react"
+import { useCart } from '../../context/cart-context';
+import axios from "axios";
+import { useAuth } from '../../context/auth-context';
 
 export function Cart() {
-    const { cartList, dispatch } = useCart();
+    const { cartList, wishList, dispatch } = useCart();
+    const { userId, login } = useAuth();
+
+
+    function isItemInWishList(wishList, id) {
+
+        const index = wishList.findIndex((wishlistItem) => wishlistItem._id === id);
+        if (index !== -1) {
+            return true;
+        }
+        return false;
+    }
     const total = cartList.reduce((accum, item) => {
         return accum + item.quantity * item.price;
     }, 0);
-    // console.log("inCart", cartList);
-    // console.log(total);
+    console.log(cartList)
+
+    async function handleRemove(product) {
+        console.log("handleRemove")
+        try {
+            const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`)
+            if (response.status === 202) {
+                console.log(response)
+                const updatedCart = response.data.user.cart
+                console.log(updatedCart)
+                dispatch({ type: "SET_CART", payload: updatedCart })
+
+                // dispatch({ type: "" })
+            }
+            // dispatch({ type: "REMOVE_FROM_CART", payload: product })
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+    async function handleMoveToWishlist(product) {
+        if (isItemInWishList(wishList, product._id) === false) {
+            console.log("Item was not in wishlist")
+            console.log(userId)
+            const response = await axios.post(`https://ecommerce.shahazad.repl.co/user/${userId}/wishlist/${product._id}`);
+            console.log(response.data);
+            console.log(product)
+            dispatch({
+                type: "ADD_TO_WISHLIST",
+                payload: product
+            })
+        }
+        if (isItemInWishList(wishList, product._id) === true) {
+            console.log("Item is in wishlist")
+            const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`)
+            if (response.status === 202) {
+                console.log(response)
+                const updatedCart = response.data.user.cart
+                console.log(updatedCart)
+                dispatch({ type: "SET_CART", payload: updatedCart })
+
+                // dispatch({ type: "" })
+            }
+        }
+    }
+
     return (
         <>
             <div className="div-cartlist-invoice">
-                <div className="cart-listing-horizontal">
-                    {cartList.map((product) => (
-                        <div className="card-horizontal" key={product.id}>
-                            <img src={product.image} alt="pic" />
-                            <div className="card-content-horizontal">
-                                <div className="div-brand-name-horizontal">
-                                    <p className="card-header-horizontal">
-                                        {product.name}
+                <div className="cart-listing-horizontal" >
+                    {(cartList.length >= 0) && cartList.map((product) => {
+                        return (
+                            <div className="card-horizontal" key={product._id} >
+                                <img src={product.image} alt="pic" />
+                                <div className="card-content-horizontal">
+                                    <div className="div-brand-name-horizontal">
+                                        <p className="card-header-horizontal">
+                                            {product.name}
+                                        </p>
+                                    </div>
+                                    <p className="price">Rs.{product.price}</p>
+                                    <p className="card-text">{product.material}</p>
+                                    <p className="card-text">
+                                        Quantity :{" "}
+                                        <button
+                                            className="button-change-quantity"
+                                            onClick={() =>
+                                                dispatch({ type: "DECREASE_QUANTITY", payload: product })
+                                            }
+                                        >
+                                            -
+                      </button>
+                                        <span className="span-quantity">{product.quantity}</span>
+                                        <button
+                                            className="button-change-quantity"
+                                            onClick={() =>
+                                                dispatch({ type: "INCREASE_QUANTITY", payload: product })
+                                            }
+                                        >
+                                            +
+                      </button>
                                     </p>
-                                </div>
-                                <p className="price">Rs.{product.price}</p>
-                                <p className="card-text">{product.material}</p>
-                                <p className="card-text">
-                                    Quantity :{" "}
-                                    <button
-                                        className="button-change-quantity"
-                                        onClick={() =>
-                                            dispatch({ type: "DECREASE_QUANTITY", payload: product })
-                                        }
-                                    >
-                                        -
+                                    <div className="div-button-action">
+                                        <button
+                                            className="button-action"
+                                            onClick={() =>
+                                                handleRemove(product)
+                                            }
+                                        >
+                                            REMOVE
                       </button>
-                                    <span className="span-quantity">{product.quantity}</span>
-                                    <button
-                                        className="button-change-quantity"
-                                        onClick={() =>
-                                            dispatch({ type: "INCREASE_QUANTITY", payload: product })
-                                        }
-                                    >
-                                        +
-                      </button>
-                                </p>
-                                <div className="div-button-action">
-                                    <button
-                                        className="button-action"
-                                        onClick={() =>
-                                            dispatch({ type: "REMOVE_FROM_CART", payload: product })
-                                        }
-                                    >
-                                        REMOVE
-                      </button>
-                                    <button
-                                        className="button-action"
-                                        onClick={() =>
-                                            dispatch({
-                                                type: "ADD_TO_WISHLIST_FROM_CART",
-                                                payload: product
-                                            })
-                                        }
-                                    >
-                                        MOVE TO WISHLIST
-                      </button>
+                                        {/* <button
+                                            className="button-action"
+                                            onClick={() =>
+                                                handleMoveToWishlist(product)
+                                            }
+                                        >
+                                            MOVE TO WISHLIST
+                      </button> */}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
                 <div className="div-invoice">
                     <h4 className="price price-detail">Price Details</h4>

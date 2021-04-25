@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
 
     const [state, authDispatch] = useReducer(reducer, initialLoginState)
     // console.log({ state })
-    return <AuthContext.Provider value={{ login: state.isLogin, authDispatch }} >
+    return <AuthContext.Provider value={{ login: state.isLogin, userId: state.userId, authDispatch }} >
         {children}
     </AuthContext.Provider>
 }

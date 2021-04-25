@@ -20,10 +20,10 @@ export function Login() {
     }
     async function handleClick() {
         try {
-            const response = await axios.post("https://ecommerce.shahazad.repl.co/login", { name: "Shahazad", password: "qwerty" })
-            console.log(response.status);
+            const response = await axios.post("https://ecommerce.shahazad.repl.co/user", { name: "Shahazad", password: "qwerty" })
+            console.log(response.data);
             if (response.status === 200) {
-                authDispatch({ type: "LOGIN_USER" })
+                authDispatch({ type: "LOGIN_USER", payload: response.data })
             }
             if (state === null) {
                 navigate("/");
@@ -33,10 +33,8 @@ export function Login() {
         } catch (error) {
             console.log(error)
         }
-
-        // authDispatch({ type: "LOGIN_USER" })
     }
-    console.log({ state })
+
     return (
         <>
             <form className="form-login" onSubmit={handleOnSubmit} >
@@ -45,7 +43,7 @@ export function Login() {
                 <button >Submit</button>
 
             </form>
-            <button style={{ position: "absolute", top: "10rem" }} onClick={handleClick}>{login ? "Log Out" : "Log In"}</button>
+            <button style={{ position: "absolute", top: "10rem" }} onClick={() => handleClick()}>{login ? "Log Out" : "Log In"}</button>
         </>
     )
 }

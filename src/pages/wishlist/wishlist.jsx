@@ -1,10 +1,59 @@
 import './wishlist.css';
 import { useCart } from '../../context/cart-context';
+import { useAuth } from '../../context/auth-context';
+import axios from "axios"
+
+
+function isItemInCart(cartList, id) {
+    const index = cartList.findIndex((cartListItem) => cartListItem._id === id);
+    if (index !== -1) {
+        return true;
+    }
+    return false;
+}
 
 
 
 export function Wishlist() {
-    const { wishList, dispatch } = useCart();
+    const { wishList, cartList, dispatch } = useCart();
+    const { userId } = useAuth();
+
+    async function handleAddToCart(product) {
+        if (isItemInCart(cartList, product._id) === false) {
+            console.log("Item was not in cart")
+            console.log(userId)
+            const response = await axios.post(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`);
+            console.log(response.data);
+            console.log(product)
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: product
+            })
+            dispatch({
+                type: "ADD_TO_CART_FROM_WISHLIST",
+                payload: product
+            })
+        }
+
+    }
+    async function handleRemoveFromWishlist(product) {
+        try {
+            const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/wishlist/${product._id}`)
+            if (response.status === 202) {
+                console.log(response)
+                const updatedWishlist = response.data.user.wishlist
+                console.log(updatedWishlist)
+                dispatch({ type: "SET_WISHLIST", payload: updatedWishlist })
+
+                // dispatch({ type: "" })
+            }
+            // dispatch({ type: "REMOVE_FROM_CART", payload: product })
+        } catch (error) {
+            console.log(error)
+        }
+        // dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product })
+    }
+
     console.log(wishList)
     return (
         <>
@@ -19,7 +68,7 @@ export function Wishlist() {
                                 <span
                                     className="material-icons icons icon-cancel"
                                     onClick={() =>
-                                        dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product })
+                                        handleRemoveFromWishlist(product)
                                     }
                                 >
                                     cancel
@@ -29,12 +78,8 @@ export function Wishlist() {
                             <p className="card-text">{product.material}</p>
                             <button
                                 className="btn btn-primary btn-add"
-                                onClick={() =>
-                                    dispatch({
-                                        type: "ADD_TO_CART_FROM_WISHLIST",
-                                        payload: product
-                                    })
-                                }
+                                onClick={() => handleAddToCart(product)}
+
                             >
                                 Buy
                 </button>

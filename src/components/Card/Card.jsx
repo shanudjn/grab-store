@@ -1,27 +1,59 @@
-import axios from "axios"
+import axios from "axios";
+import { useAuth } from '../../context/auth-context';
 
 export function Card({ product, getColor, isItemInWishList, isItemInCart, cartList, wishList, dispatch }) {
 
-    async function addToCart() {
-        const response = await axios.post('https://ecommerce.shahazad.repl.co/cart', { _id: product._id, quantity: 1 })
-        console.log(response.data);
-        dispatch({
-            type: "ADD_TO_CART",
-            payload: product
-        })
-    }
+    const { userId } = useAuth();
 
-    function addToWishList() {
-        dispatch({ type: "ADD_TO_WISHLIST", payload: product })
+    console.log(userId)
+
+    async function handleAddToCart(product) {
+        if (isItemInCart(cartList, product._id) === false) {
+            console.log("Item was not in cart")
+            console.log(userId)
+            const response = await axios.post(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`);
+            console.log(response.data);
+            console.log(product)
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: product
+            })
+        }
+
     }
 
     async function handleAddToWishlist() {
-        isItemInWishList(wishList, product._id)
+        if (isItemInWishList(wishList, product._id) === false) {
+            console.log("Item was not in wishlist")
+            console.log(userId)
+            const response = await axios.post(`https://ecommerce.shahazad.repl.co/user/${userId}/wishlist/${product._id}`);
+            console.log(response.data);
+            console.log(product)
+            dispatch({
+                type: "ADD_TO_WISHLIST",
+                payload: product
+            })
+        }
+        if (isItemInWishList(wishList, product._id) === true) {
+            console.log("Item is in wishlist")
+            console.log(userId)
+            const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/wishlist/${product._id}`);
+            console.log(response.data);
+            console.log(product)
+            dispatch({
+                type: "REMOVE_FROM_WISHLIST",
+                payload: product
+            })
+        }
 
-            ? addToCart()
-
-            : addToWishList()
+        //dispatch({ type: "ADD_TO_WISHLIST", payload: product })
     }
+
+    // function handleAddToWishlist() {
+    //     // isItemInWishList(wishList, product._id)
+    //     //     ? addToCart()
+    //     //     : addToWishList()
+    // }
 
     return (
         <div className="card card-badge" key={product._id}>
@@ -34,9 +66,9 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
                         className="material-icons icons"
                         style={{
                             color: getColor(wishList, product._id),
-                            border: "black"
+                            // border: "black"
                         }}
-                        onClick={handleAddToWishlist}
+                        onClick={() => handleAddToWishlist(product)}
                     >
                         favorite
                 </span>
@@ -52,7 +84,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
                 ) : (
                     <button
                         className="btn btn-primary"
-                        onClick={addToCart}
+                        onClick={() => handleAddToCart(product)}
 
                     >
                         Add To Cart

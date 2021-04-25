@@ -1,15 +1,15 @@
 
 
 export function reducer(state, action) {
-    console.log("initial state")
-    switch (action.type) {
+    const { type, payload } = action
+    switch (type) {
 
         case "LOGIN_USER":
-            return { isLogin: !state.isLogin }
+            return { isLogin: !state.isLogin, userId: payload.registeredUserId }
 
         default:
             break;
     }
 }
 
-export const initialLoginState = { isLogin: false }
+export const initialLoginState = { isLogin: false, userId: "" }
