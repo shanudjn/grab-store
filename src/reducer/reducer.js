@@ -6,7 +6,8 @@ export function reducer(state, action) {
 
         case "LOGIN_USER":
             return { isLogin: !state.isLogin, userId: payload.registeredUserId }
-
+        case "LOGOUT_USER":
+            return { isLogin: !state.isLogin }
         default:
             break;
     }

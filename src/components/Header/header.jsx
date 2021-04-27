@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useProduct } from '../../context/product-context';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './header.css';
 
 
-export function Header({ setRoute, wishlistLength, cartlistLength }) {
+export function Header({ wishlistLength, cartlistLength }) {
     const { productFilterDispatch } = useProduct();
+    const navigate = useNavigate();
 
     const [searchInput, setSearchInput] = useState("")
 
@@ -13,8 +14,7 @@ export function Header({ setRoute, wishlistLength, cartlistLength }) {
         e.preventDefault();
         console.log(searchInput)
         productFilterDispatch({ type: "SEARCH", payload: searchInput });
-        setRoute("productListing");
-
+        navigate("/products");
     }
 
     return (

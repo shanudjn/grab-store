@@ -13,14 +13,19 @@ export function Login() {
     const { state } = useLocation();
     const navigate = useNavigate();
 
-    function handleOnSubmit(e) {
-        e.preventDefault();
+    function handleClick(e) {
+
         console.log(name, password);
+        authDispatch({ type: "LOGOUT_USER" })
+        navigate("/");
 
     }
-    async function handleClick() {
+    async function handleOnSubmit(e) {
+        e.preventDefault();
+        setName(name);
+        setPassword(password);
         try {
-            const response = await axios.post("https://ecommerce.shahazad.repl.co/user", { name: "Shahazad", password: "qwerty" })
+            const response = await axios.post("https://ecommerce.shahazad.repl.co/user", { name: name, password: password })
             console.log(response.data);
             if (response.status === 200) {
                 authDispatch({ type: "LOGIN_USER", payload: response.data })
@@ -37,13 +42,12 @@ export function Login() {
 
     return (
         <>
-            <form className="form-login" onSubmit={handleOnSubmit} >
+            {!login && <form className="form-login" onSubmit={handleOnSubmit} >
                 <input placeholder="Enter Username" onChange={(e) => setName(e.target.value)} />
                 <input placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
-                <button >Submit</button>
-
-            </form>
-            <button style={{ position: "absolute", top: "10rem" }} onClick={() => handleClick()}>{login ? "Log Out" : "Log In"}</button>
+                <button className="button-submit">Submit</button>
+            </form>}
+            {login && <button className="button-logout" onClick={() => handleClick()}>LogOut</button>}
         </>
     )
 }

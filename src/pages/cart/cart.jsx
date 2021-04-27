@@ -1,5 +1,5 @@
 import './cart.css';
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 import { useCart } from '../../context/cart-context';
 import axios from "axios";
 import { useAuth } from '../../context/auth-context';
@@ -52,25 +52,25 @@ export function Cart() {
                 payload: product
             })
         }
-        if (isItemInWishList(wishList, product._id) === true) {
-            console.log("Item is in wishlist")
-            const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`)
-            if (response.status === 202) {
-                console.log(response)
-                const updatedCart = response.data.user.cart
-                console.log(updatedCart)
-                dispatch({ type: "SET_CART", payload: updatedCart })
 
-                // dispatch({ type: "" })
-            }
+        console.log("Item is in wishlist")
+        const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`)
+        if (response.status === 202) {
+            console.log(response)
+            const updatedCart = response.data.user.cart
+            console.log(updatedCart)
+            dispatch({ type: "SET_CART", payload: updatedCart })
+
+            // dispatch({ type: "" })
         }
+
     }
 
     return (
         <>
             <div className="div-cartlist-invoice">
                 <div className="cart-listing-horizontal" >
-                    {(cartList.length >= 0) && cartList.map((product) => {
+                    {cartList.map((product) => {
                         return (
                             <div className="card-horizontal" key={product._id} >
                                 <img src={product.image} alt="pic" />
@@ -111,21 +111,21 @@ export function Cart() {
                                         >
                                             REMOVE
                       </button>
-                                        {/* <button
+                                        <button
                                             className="button-action"
                                             onClick={() =>
                                                 handleMoveToWishlist(product)
                                             }
                                         >
                                             MOVE TO WISHLIST
-                      </button> */}
+                      </button>
                                     </div>
                                 </div>
                             </div>
                         )
                     })}
                 </div>
-                <div className="div-invoice">
+                {(cartList.length > 0) && <div className="div-invoice">
                     <h4 className="price price-detail">Price Details</h4>
                     <ul className="list-invoice">
                         <li className="list-item-invoice">
@@ -144,7 +144,10 @@ export function Cart() {
                         <h4 className="">Total : </h4>
                         <h4 className="card-text invoice-price">Rs.{total}</h4>
                     </div>
-                </div>
+                </div>}
+                {
+                    (cartList.length === 0) && <p style={{ "margin-top": "5rem" }}>There are no items in cart.</p>
+                }
             </div>
         </>
     );

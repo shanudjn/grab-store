@@ -56,8 +56,7 @@ export function ProductListing() {
 
     function getSearchedData(productList, searchTerm) {
         return productList.filter(item => {
-
-            if (item.name)
+            if (item.name?.toLowerCase().includes(searchTerm.toLowerCase()) === true || item.brand?.toLowerCase().includes(searchTerm.toLowerCase()) === true)
                 return item
             return null
         })
