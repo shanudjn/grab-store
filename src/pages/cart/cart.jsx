@@ -25,7 +25,7 @@ export function Cart() {
     async function handleRemove(product) {
         console.log("handleRemove")
         try {
-            const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`)
+            const response = await axios.delete(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`)
             if (response.status === 202) {
                 console.log(response)
                 const updatedCart = response.data.user.cart
@@ -44,7 +44,7 @@ export function Cart() {
         if (isItemInWishList(wishList, product._id) === false) {
             console.log("Item was not in wishlist")
             console.log(userId)
-            const response = await axios.post(`https://ecommerce.shahazad.repl.co/user/${userId}/wishlist/${product._id}`);
+            const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/wishlist/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({
@@ -54,7 +54,7 @@ export function Cart() {
         }
 
         console.log("Item is in wishlist")
-        const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`)
+        const response = await axios.delete(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`)
         if (response.status === 202) {
             console.log(response)
             const updatedCart = response.data.user.cart

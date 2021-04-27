@@ -25,7 +25,7 @@ export function Login() {
         setName(name);
         setPassword(password);
         try {
-            const response = await axios.post("https://ecommerce.shahazad.repl.co/user", { name: name, password: password })
+            const response = await axios.post("https://neog-ecommerce.herokuapp.com/user", { name: name, password: password })
             console.log(response.data);
             if (response.status === 200) {
                 authDispatch({ type: "LOGIN_USER", payload: response.data })

@@ -11,7 +11,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
         if (isItemInCart(cartList, product._id) === false) {
             console.log("Item was not in cart")
             console.log(userId)
-            const response = await axios.post(`https://ecommerce.shahazad.repl.co/user/${userId}/product/${product._id}`);
+            const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({
@@ -26,7 +26,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
         if (isItemInWishList(wishList, product._id) === false) {
             console.log("Item was not in wishlist")
             console.log(userId)
-            const response = await axios.post(`https://ecommerce.shahazad.repl.co/user/${userId}/wishlist/${product._id}`);
+            const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/wishlist/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({
@@ -37,7 +37,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
         if (isItemInWishList(wishList, product._id) === true) {
             console.log("Item is in wishlist")
             console.log(userId)
-            const response = await axios.delete(`https://ecommerce.shahazad.repl.co/user/${userId}/wishlist/${product._id}`);
+            const response = await axios.delete(`https://neog-ecommerce.herokuapp.com/user/${userId}/wishlist/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({

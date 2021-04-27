@@ -9,7 +9,7 @@ export function ProductsProvider({ children }) {
 
     const getData = async () => {
         try {
-            const { data: { products } } = await axios.get("https://ecommerce.shahazad.repl.co/products");
+            const { data: { products } } = await axios.get("https://neog-ecommerce.herokuapp.com/products");
 
             setProductList(products)
 

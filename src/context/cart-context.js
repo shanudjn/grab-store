@@ -15,7 +15,7 @@ export function CartProvider({ children }) {
 
     const getCartListAndWishListData = async () => {
         try {
-            const userCartDetails = await axios.get(`https://ecommerce.shahazad.repl.co/user/${userId}`);
+            const userCartDetails = await axios.get(`https://neog-ecommerce.herokuapp.com/user/${userId}`);
             //{ data: { user: { cart } } }
             // console.log()
             const cartData = userCartDetails.data.user.cart
