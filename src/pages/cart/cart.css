@@ -100,4 +100,10 @@
     display: flex;
     align-items: baseline;
   }
+  @media screen and (max-width:768px) {
+    .div-cartlist-invoice{
+      display: flex;
+      flex-direction: column;
+    }
+  }
   
