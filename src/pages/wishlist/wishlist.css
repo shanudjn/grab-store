@@ -1,12 +1,11 @@
 .div-cart-listing{
-    /* border: 1px solid red; */
+
     max-width: 1000px;
     margin:auto;
     margin-top: 6rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    /* border:1px solid red; */
-    /* order:2; */
+
   }
   .card {
     /* max-width: 200px; */
@@ -26,6 +25,16 @@ padding: 0.5rem;
   top: 0.25rem;
   right: 00.25rem;
   color: var(--white);
+}
+@media screen and (max-width : 768px){
+
+.div-cart-listing {
+
+margin-top: 6rem;
+display: grid;
+grid-template-columns: 1fr 1fr ;
+
+}
 }
 
   
