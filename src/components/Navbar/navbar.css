@@ -11,9 +11,11 @@
 }
 .navbar-item{
     margin:1rem;
+    
 }
 .navbar-item a{
     text-decoration: none;
+    color:black;
 
 }
 .navbar-item a:hover{
