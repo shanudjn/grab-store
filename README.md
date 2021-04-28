@@ -1,10 +1,15 @@
-# Getting Started with Create React App
+# Grab Store v1.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is hosted on  [Netlify](https://grab-store.netlify.app/).
 
-## Available Scripts
+## React Concepts Implemented
+The follwing the concepts in ReactJS that were implemented in this project
+1. Hooks(useState, useEffect, useContext, userReducer)
+2. react-router-v6
+3. Express and MongoDb for backend
 
-In the project directory, you can run:
+## Login Credentials
+    
 
 ### `yarn start`
 
