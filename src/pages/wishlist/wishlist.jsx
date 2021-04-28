@@ -88,6 +88,7 @@ export function Wishlist() {
 
                     </div>
                 ))}
+
             </div>
         </>
     );

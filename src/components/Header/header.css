@@ -10,7 +10,8 @@
     z-index: 1;
     width: 100%;
     background-color: var(--white);   
-    flex-wrap: wrap;    
+    justify-content: space-around;
+    /* flex-wrap: wrap;     */
   }
 .brand-section h1{
   color:var(--primary-color)
