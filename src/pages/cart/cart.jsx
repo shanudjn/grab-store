@@ -32,9 +32,9 @@ export function Cart() {
                 console.log(updatedCart)
                 dispatch({ type: "SET_CART", payload: updatedCart })
 
-                // dispatch({ type: "" })
+
             }
-            // dispatch({ type: "REMOVE_FROM_CART", payload: product })
+
         } catch (error) {
             console.log(error)
         }
@@ -61,7 +61,6 @@ export function Cart() {
             console.log(updatedCart)
             dispatch({ type: "SET_CART", payload: updatedCart })
 
-            // dispatch({ type: "" })
         }
 
     }
