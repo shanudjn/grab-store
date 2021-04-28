@@ -15,4 +15,4 @@ The follwing the concepts in ReactJS that were implemented in this project
 
 
 ## Note
-### This is just an initial version of the app. For feature to come in future updates
+#### This is just an initial version of the app. More features to come in future updates
