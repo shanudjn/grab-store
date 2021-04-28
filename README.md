@@ -10,7 +10,9 @@ The follwing the concepts in ReactJS that were implemented in this project
 
 ## Login Credentials
 
-### `username` : `Shahazad`
-### `password` : `qwerty`
+#### `username` : `Shahazad`
+#### `password` : `qwerty`
 
-### `This is just an initial version of the app. For feature to come in future updates`
+
+## Note
+### This is just an initial version of the app. For feature to come in future updates
