@@ -159,7 +159,7 @@ export function Cart() {
                     </div>
                     <button
                         className="btn btn-primary btn-add"
-                        onClick={() => handleCheckout(total)}
+                    // onClick={() => handleCheckout(total)}
 
                     >
                         Checkout
