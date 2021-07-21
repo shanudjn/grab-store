@@ -65,6 +65,20 @@ export function Cart() {
 
     }
 
+    // async function handleCheckout(total) {
+    //     console.log(total)
+    //     try {
+    //         const paymentResponse = await axios.post('https://api.razorpay.com/v1/orders', {
+    //             "amount": total,
+    //             "currency": "INR",
+    //             "receipt": "receipt#1"
+    //         })
+    //         console.log(paymentResponse)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
     return (
         <>
             <div className="div-cartlist-invoice">
@@ -90,7 +104,7 @@ export function Cart() {
                                             }
                                         >
                                             -
-                      </button>
+                                        </button>
                                         <span className="span-quantity">{product.quantity}</span>
                                         <button
                                             className="button-change-quantity"
@@ -99,7 +113,7 @@ export function Cart() {
                                             }
                                         >
                                             +
-                      </button>
+                                        </button>
                                     </p>
                                     <div className="div-button-action">
                                         <button
@@ -109,7 +123,7 @@ export function Cart() {
                                             }
                                         >
                                             REMOVE
-                      </button>
+                                        </button>
                                         <button
                                             className="button-action"
                                             onClick={() =>
@@ -117,7 +131,7 @@ export function Cart() {
                                             }
                                         >
                                             MOVE TO WISHLIST
-                      </button>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -143,6 +157,13 @@ export function Cart() {
                         <h4 className="">Total : </h4>
                         <h4 className="card-text invoice-price">Rs.{total}</h4>
                     </div>
+                    <button
+                        className="btn btn-primary btn-add"
+                        onClick={() => handleCheckout(total)}
+
+                    >
+                        Checkout
+                    </button>
                 </div>}
                 {
                     (cartList.length === 0) && <p style={{ "margin-top": "5rem" }}>There are no items in cart.</p>

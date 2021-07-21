@@ -25,14 +25,19 @@ export function Wishlist() {
             const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`);
             console.log(response.data);
             console.log(product)
-            dispatch({
-                type: "ADD_TO_CART",
-                payload: product
-            })
+            // dispatch({
+            //     type: "ADD_TO_CART",
+            //     payload: product
+            // })
             dispatch({
                 type: "ADD_TO_CART_FROM_WISHLIST",
                 payload: product
             })
+            handleRemoveFromWishlist(product)
+        }
+        else {
+            dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product })
+
         }
 
     }
@@ -51,12 +56,14 @@ export function Wishlist() {
         } catch (error) {
             console.log(error)
         }
-        // dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product })
     }
 
     console.log(wishList)
     return (
         <>
+            {
+                (wishList.length === 0) && <p style={{ "margin-top": "5rem" }}>There are no items in wishlist.</p>
+            }
             <div className="div-cart-listing">
                 {wishList.map((product) => (
                     <div className="card card-badge" key={product._id}>
@@ -82,7 +89,7 @@ export function Wishlist() {
 
                             >
                                 Buy
-                </button>
+                            </button>
                         </div>
 
 

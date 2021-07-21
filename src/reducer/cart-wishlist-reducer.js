@@ -4,14 +4,22 @@ export function cartAndWishlistReducer(state, action) {
     console.log("inside dispatch");
     switch (action.type) {
         case "SET_CART":
+            console.log("setting cart", action.payload)
+            const newCart = action.payload.map((item) => ({ ...item, quantity: 1 }))
+            console.log("new cart", newCart)
             return {
                 ...state,
-                cartList: [...action.payload]
+                cartList: newCart
             }
         case "SET_WISHLIST":
+            console.log("setting wishlist", action.payload)
+
+            const newWishlist = action.payload.map((item) => ({ ...item, quantity: 1 }))
+            console.log("new cart", newWishlist)
+
             return {
                 ...state,
-                wishList: [...action.payload]
+                wishList: newWishlist
             }
 
         case "ADD_TO_CART":
@@ -35,7 +43,7 @@ export function cartAndWishlistReducer(state, action) {
                 wishList: state.wishList.concat(action.payload)
             };
         case "REMOVE_FROM_WISHLIST":
-            console.log(action.payload);
+            console.log("removing from wishlist", action.payload);
 
             return {
                 ...state,
@@ -45,7 +53,7 @@ export function cartAndWishlistReducer(state, action) {
             };
 
         case "ADD_TO_CART_FROM_WISHLIST":
-            console.log(action.payload);
+            console.log("add to cart from wishlist", action.payload);
             return {
                 ...state,
                 cartList: [...state.cartList, { ...action.payload, quantity: 1 }],
@@ -72,6 +80,7 @@ export function cartAndWishlistReducer(state, action) {
 
         case "INCREASE_QUANTITY":
             console.log("Inside sec", action.payload);
+            // action.payload.quantity = 1
             return {
                 ...state,
                 cartList: state.cartList.map((cartListItem) =>

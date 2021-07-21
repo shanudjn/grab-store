@@ -6,8 +6,8 @@ import './login.css';
 
 export function Login() {
 
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    const [name, setName] = useState("Shahazad");
+    const [password, setPassword] = useState("qwerty");
 
     const { login, authDispatch } = useAuth();
     const { state } = useLocation();
@@ -43,9 +43,9 @@ export function Login() {
     return (
         <>
             {!login && <form className="form-login" onSubmit={handleOnSubmit} >
-                <input placeholder="Enter Username" onChange={(e) => setName(e.target.value)} />
-                <input placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
-                <button className="button-submit">Submit</button>
+                <input type="text" placeholder="Enter Username" onChange={(e) => setName(e.target.value)} value={name} />
+                <input type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                <button className="button-submit">Sign In</button>
             </form>}
             {login && <button className="button-logout" onClick={() => handleClick()}>LogOut</button>}
         </>
