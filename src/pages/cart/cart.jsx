@@ -3,6 +3,7 @@ import './cart.css';
 import { useCart } from '../../context/cart-context';
 import axios from "axios";
 import { useAuth } from '../../context/auth-context';
+import { loadScript } from '../../utils/paymentUtils';
 
 export function Cart() {
     const { cartList, wishList, dispatch } = useCart();
@@ -65,19 +66,53 @@ export function Cart() {
 
     }
 
-    // async function handleCheckout(total) {
-    //     console.log(total)
-    //     try {
-    //         const paymentResponse = await axios.post('https://api.razorpay.com/v1/orders', {
-    //             "amount": total,
-    //             "currency": "INR",
-    //             "receipt": "receipt#1"
-    //         })
-    //         console.log(paymentResponse)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    async function handleCheckout(total) {
+        console.log(total)
+        const response = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+        if (!response) {
+            console.log("Razorpay SDK failed to load. Are you online?");
+            return;
+        }
+        // const newOrder = await axios.post("http://localhost:8080/payment/orders", { amount: total * 100 })
+        const newOrder = await axios.post("https://neog-ecommerce.herokuapp.com/payment/orders", { amount: total * 100 })
+
+        if (!newOrder) {
+            console.log("Server error. Are you online?");
+            return;
+        }
+        console.log(newOrder.data)
+        const { amount, id: order_id, currency } = newOrder.data;
+
+
+        var options = {
+            "key": "rzp_test_RygIasGLM6cVia", // Enter the Key ID generated from the Dashboard
+            "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": currency,
+
+            "description": "Test Transaction",
+
+            "order_id": order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": async function (response) {
+                const data = {
+                    orderCreationId: order_id,
+                    razorpayPaymentId: response.razorpay_payment_id,
+                    razorpayOrderId: response.razorpay_order_id,
+                    razorpaySignature: response.razorpay_signature,
+                };
+
+                // const result = await axios.post("http://localhost:8080/payment/success", data);
+                const result = await axios.post("https://neog-ecommerce.herokuapp.com/success", data);
+
+
+                alert(result.data.msg);
+                console.log(result);
+
+            },
+
+        };
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open()
+    }
 
     return (
         <>
@@ -159,7 +194,7 @@ export function Cart() {
                     </div>
                     <button
                         className="btn btn-primary btn-add"
-                    // onClick={() => handleCheckout(total)}
+                        onClick={() => handleCheckout(total)}
 
                     >
                         Checkout

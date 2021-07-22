@@ -9,6 +9,7 @@ import { Wishlist } from './pages/wishlist/wishlist';
 import { ProductListing } from './pages/products-listing/products-listing';
 import { Cart } from './pages/cart/cart';
 import { Login } from './pages/login/login';
+import Signup from './pages/signup/signup'
 // import { useCart } from './context/cart-context';
 import { PrivateRoute } from './private/PrivateRoute';
 import { useAuth } from './context/auth-context';
@@ -26,6 +27,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
         <PrivateRoute path="/products" element={<ProductListing />} />
         <PrivateRoute path="/cart" element={<Cart />} />
         <PrivateRoute path="/wishlist" element={<Wishlist />} />

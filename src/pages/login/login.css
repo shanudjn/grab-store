@@ -11,9 +11,13 @@
     padding: 0.5rem;
 }
 .button-submit{
-    width :5rem;
+    width :92%;
     margin: auto;
     padding: 0.5rem;
+    background-color: var(--primary-color);
+    color:var(--white);
+    border: none;
+    cursor: pointer;
 
 }
 .button-logout{
