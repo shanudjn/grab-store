@@ -26,7 +26,7 @@ export function Cart() {
     async function handleRemove(product) {
         console.log("handleRemove")
         try {
-            const response = await axios.delete(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`)
+            const response = await axios.delete(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/product/${product._id}`)
             if (response.status === 202) {
                 console.log(response)
                 const updatedCart = response.data.user.cart
@@ -45,7 +45,7 @@ export function Cart() {
         if (isItemInWishList(wishList, product._id) === false) {
             console.log("Item was not in wishlist")
             console.log(userId)
-            const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/wishlist/${product._id}`);
+            const response = await axios.post(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/wishlist/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({
@@ -55,7 +55,7 @@ export function Cart() {
         }
 
         console.log("Item is in wishlist")
-        const response = await axios.delete(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`)
+        const response = await axios.delete(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/product/${product._id}`)
         if (response.status === 202) {
             console.log(response)
             const updatedCart = response.data.user.cart
@@ -74,7 +74,7 @@ export function Cart() {
             return;
         }
         // const newOrder = await axios.post("http://localhost:8080/payment/orders", { amount: total * 100 })
-        const newOrder = await axios.post("https://neog-ecommerce.herokuapp.com/payment/orders", { amount: total * 100 })
+        const newOrder = await axios.post("https://ecommerce-backend-dz7d.onrender.com/payment/orders", { amount: total * 100 })
 
         if (!newOrder) {
             console.log("Server error. Are you online?");
@@ -101,7 +101,7 @@ export function Cart() {
                 };
 
                 // const result = await axios.post("http://localhost:8080/payment/success", data);
-                const result = await axios.post("https://neog-ecommerce.herokuapp.com/success", data);
+                const result = await axios.post("https://ecommerce-backend-dz7d.onrender.com/success", data);
 
 
                 alert(result.data.msg);

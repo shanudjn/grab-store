@@ -11,7 +11,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
         if (isItemInCart(cartList, product._id) === false) {
             console.log("Item was not in cart")
             console.log(userId)
-            const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`);
+            const response = await axios.post(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/product/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({
@@ -26,7 +26,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
         if (isItemInWishList(wishList, product._id) === false) {
             console.log("Item was not in wishlist")
             console.log(userId)
-            const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/wishlist/${product._id}`);
+            const response = await axios.post(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/wishlist/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({
@@ -37,7 +37,7 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
         if (isItemInWishList(wishList, product._id) === true) {
             console.log("Item is in wishlist")
             console.log(userId)
-            const response = await axios.delete(`https://neog-ecommerce.herokuapp.com/user/${userId}/wishlist/${product._id}`);
+            const response = await axios.delete(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/wishlist/${product._id}`);
             console.log(response.data);
             console.log(product)
             dispatch({
@@ -56,10 +56,9 @@ export function Card({ product, getColor, isItemInWishList, isItemInCart, cartLi
     // }
 
     return (
-        <div className="card card-badge" key={product._id}>
+        <div className="card card-badge" key={product._id} style={{display:"flex", flexDirection:"column",flexGrow:1, justifyContent:"space-between"}}>
             <img src={product.image} alt="pic" />
-
-            <div className="card-content">
+            <div className="card-content" style={{display:"flex", flexDirection:"column",flexGrow:1, justifyContent:"space-between"}}>
                 <div className="div-brand-name">
                     <p className="para-price">{product.name}</p>
                     <span

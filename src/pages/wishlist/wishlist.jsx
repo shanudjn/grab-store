@@ -22,7 +22,7 @@ export function Wishlist() {
         if (isItemInCart(cartList, product._id) === false) {
             console.log("Item was not in cart")
             console.log(userId)
-            const response = await axios.post(`https://neog-ecommerce.herokuapp.com/user/${userId}/product/${product._id}`);
+            const response = await axios.post(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/product/${product._id}`);
             console.log(response.data);
             console.log(product)
             // dispatch({
@@ -43,7 +43,7 @@ export function Wishlist() {
     }
     async function handleRemoveFromWishlist(product) {
         try {
-            const response = await axios.delete(`https://neog-ecommerce.herokuapp.com/user/${userId}/wishlist/${product._id}`)
+            const response = await axios.delete(`https://ecommerce-backend-dz7d.onrender.com/user/${userId}/wishlist/${product._id}`)
             if (response.status === 202) {
                 console.log(response)
                 const updatedWishlist = response.data.user.wishlist

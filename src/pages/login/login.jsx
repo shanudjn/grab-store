@@ -29,16 +29,18 @@ export function Login() {
         setName(name);
         setPassword(password);
         try {
-            const response = await axios.post("https://neog-ecommerce.herokuapp.com/user", { name: name, password: password })
-            console.log(response.data);
+            const response = await axios.post("https://ecommerce-backend-dz7d.onrender.com/user", { name: name, password: password })
+            console.log("response of login",response.data);
             if (response.status === 200) {
-                authDispatch({ type: "LOGIN_USER", payload: response.data })
+                authDispatch({ type: "LOGIN_USER", payload: response.data });
+                console.log("from",state.from)
+                navigate(state.from.pathname);
             }
-            if (state === null) {
-                navigate("/");
-            } else {
-                navigate(state.from);
-            }
+            // if (state === null) {
+            //     navigate("/");
+            // } else {
+            //     navigate(state.from);
+            // }
         } catch (error) {
             console.log(error)
         }
